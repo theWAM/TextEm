@@ -12,25 +12,20 @@ class TextPhone:
 
     def __init__(self, addy, pwd, to, message):
 
-        self.ADDRESS = addy
-        self.PASSWORD = pwd
-        self.TO = to
-        self.MESSAGE = message
-
         s = smtplib.SMTP(host = "smtp.gmail.com", port = 587)
         s.starttls()
         
         try:
-            s.login(self.ADDRESS, self.PASSWORD)
+            s.login(addy, pwd)
 
             print("Email successfully authenticated...")
 
             msg = MIMEMultipart()
 
-            msg['From'] = self.ADDRESS
-            msg['To'] = self.TO
+            msg['From'] = addy
+            msg['To'] = to
 
-            msg.attach(MIMEText(self.MESSAGE, 'plain'))
+            msg.attach(MIMEText(message, 'plain'))
 
             s.send_message(msg)
     
